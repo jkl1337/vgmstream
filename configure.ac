@@ -53,10 +53,6 @@ PKG_CHECK_MODULES(AUDACIOUS, [audacious >= 3.5.0],  have_audacious=yes,
 )
 AM_CONDITIONAL(HAVE_AUDACIOUS, test "$have_audacious" = yes)
 
-PKG_CHECK_MODULES(GTK, [glib-2.0 >= 2.6.0 gtk+-2.0 >= 2.6.0 gthread-2.0 pango],
-    , [AC_MSG_ERROR([Cannot find glib2/gtk2/pango])]
-)
-
 have_libao=no
 PKG_CHECK_MODULES(AO, [ao >= 1.1.0], have_libao=yes,
         [AC_MSG_WARN([Cannot find libao - will not build vgmstream123])])

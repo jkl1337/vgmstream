@@ -7,8 +7,7 @@ add_library(audacious_vgmstream SHARED
 # Link to the vgmstream library and audacious library
 target_link_libraries(audacious_vgmstream
 	libvgmstream
-	${AUDACIOUS_LINK_LIBRARIES}
-	${GTK_LINK_LIBRARIES})
+	${AUDACIOUS_LINK_LIBRARIES})
 
 setup_target(audacious_vgmstream TRUE)
 
@@ -32,25 +31,21 @@ macro(extract_non_defines CFLAGS CFLAGS_COPY)
 endmacro()
 
 extract_defines(AUDACIOUS_CFLAGS_OTHER AUDACIOUS_DEFINES)
-extract_defines(GTK_CFLAGS_OTHER GTK_DEFINES)
 extract_non_defines(AUDACIOUS_CFLAGS_OTHER AUDACIOUS_CFLAGS_OTHER)
-extract_non_defines(GTK_CFLAGS_OTHER GTK_CFLAGS_OTHER)
 
-# Include compile definitions for Audacious and GTK, as well as the version string
+# Include compile definitions for Audacious, as well as the version string
 target_compile_definitions(audacious_vgmstream PRIVATE
 	${AUDACIOUS_DEFINES}
-	${GTK_DEFINES}
 	VGMSTREAM_VERSION="${VGMSTREAM_VERSION}")
 
-# Include compile flags for Audacious and GTK
+# Include compile flags for Audacious
 set_target_properties(audacious_vgmstream PROPERTIES
-	COMPILE_FLAGS "${AUDACIOUS_CFLAGS_OTHER} ${GTK_CFLAGS_OTHER}")
+	COMPILE_FLAGS "${AUDACIOUS_CFLAGS_OTHER}")
 
-# Make sure that the binary directory is included (for version.h) as well as the Audacious and GTK include directories
+# Make sure that the binary directory is included (for version.h) as well as the Audacious include directories
 target_include_directories(audacious_vgmstream PRIVATE
 	${VGM_BINARY_DIR}
-	${AUDACIOUS_INCLUDE_DIRS}
-	${GTK_INCLUDE_DIRS})
+	${AUDACIOUS_INCLUDE_DIRS})
 
 # Make sure that whatever compiler we use can handle these features
 target_compile_features(audacious_vgmstream PRIVATE
