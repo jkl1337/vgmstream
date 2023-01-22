@@ -241,7 +241,7 @@ static bool read_info(const char* filename, Tuple & tuple) {
     if (total_subtunes > 32767)
         total_subtunes = 32767;
     // format has subsongs but Audacious didn't ask for subsong yet
-    if (total_subtunes >= 1 && !use_subtune) {
+    if (total_subtunes > 1 && !use_subtune) {
         //set nullptr to leave subsong index linear (must add +1 to subtune)
         tuple.set_subtunes(total_subtunes, nullptr);
 
